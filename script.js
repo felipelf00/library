@@ -71,24 +71,23 @@ function display() {
 
 display();
 
-const btnAddBook = document.querySelector("#add-book");
-const newTitle = document.querySelector("#title");
-const newAuthor = document.querySelector("#author");
-const newPages = document.querySelector("#pages");
-const newIsRead = document.querySelector("#isRead");
-
 function clearForm() {
-  newTitle.value = "";
-  newAuthor.value = "";
-  newPages.value = "";
-  newIsRead.checked = false;
+  document.querySelector("#title").value = "";
+  document.querySelector("#author").value = "";
+  document.querySelector("#pages").value = "";
+  document.querySelector("#isRead").checked = false;
 }
+
+const btnAddBook = document.querySelector("#add-book");
 
 btnAddBook.addEventListener("click", (event) => {
   event.preventDefault();
-  addBook(
-    new Book(newTitle.value, newAuthor.value, newPages.value, newIsRead.value)
-  );
+  const newTitle = document.querySelector("#title");
+  const newAuthor = document.querySelector("#author");
+  const newPages = document.querySelector("#pages");
+  const newIsRead = document.querySelector("#isRead").checked;
+
+  addBook(new Book(newTitle.value, newAuthor.value, newPages.value, newIsRead));
   display();
   clearForm();
 });

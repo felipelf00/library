@@ -24,12 +24,12 @@
 
         <div class="pages">
           <label for="pages">Number of pages:</label>
-          <input type="tel" id="pages" name="pages" required />
+          <input type="tel" id="pages" name="pages" pattern="\d" required />
         </div>
 
         <div class="read">
           <label for="isRead">Has it been read?</label>
-          <input type="checkbox" id="isRead" name="isRead" value="1" />
+          <input type="checkbox" id="isRead" name="isRead" />
         </div>
 
         <button id="add-book">Add Book</button>
