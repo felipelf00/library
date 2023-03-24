@@ -9,17 +9,32 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <form action="#">
-      <label for="title">Book title</label>
-      <input type="text" id="title" name="title" required />
-      <label for="author">Author</label>
-      <input type="text" id="author" name="author" required />
-      <label for="pages">Number of pages</label>
-      <input type="tel" id="pages" name="pages" required />
-      <label for="isRead">Has it been read?</label>
-      <input type="checkbox" id="isRead" name="isRead" value="true" />
-      <button>Add Book</button>
-    </form>
+    <h1>My personal library</h1>
+    <div class="new-book">
+      <form action="#">
+        <div class="title">
+          <label for="title">Book title:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+
+        <div class="author">
+          <label for="author">Author:</label>
+          <input type="text" id="author" name="author" required />
+        </div>
+
+        <div class="pages">
+          <label for="pages">Number of pages:</label>
+          <input type="tel" id="pages" name="pages" required />
+        </div>
+
+        <div class="read">
+          <label for="isRead">Has it been read?</label>
+          <input type="checkbox" id="isRead" name="isRead" value="1" />
+        </div>
+
+        <button id="add-book">Add Book</button>
+      </form>
+    </div>
 
     <table id="book-list">
       <tr>

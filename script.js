@@ -13,27 +13,27 @@ Book.prototype.info = function () {
 };
 
 //example book
-const infiniteJest = new Book(
-  "Infinite Jest",
-  "David Foster Wallace",
-  1000,
-  true
-);
+// const infiniteJest = new Book(
+//   "Infinite Jest",
+//   "David Foster Wallace",
+//   1000,
+//   true
+// );
 
-const grandeSertao = new Book(
-  "Grande Sertão Veredas",
-  "Guimarães Rosa",
-  720,
-  true
-);
+// const grandeSertao = new Book(
+//   "Grande Sertão Veredas",
+//   "Guimarães Rosa",
+//   720,
+//   false
+// );
 
 function addBook(book) {
   library.push(book);
 }
 
 //example test
-addBook(infiniteJest);
-addBook(grandeSertao);
+// addBook(infiniteJest);
+// addBook(grandeSertao);
 
 function createRow(book) {
   const table = document.getElementById("book-list");
@@ -49,16 +49,46 @@ function createRow(book) {
   pages.textContent = `${book.pages}`;
   tableRow.appendChild(pages);
   const read = document.createElement("td");
-  if ((book.isRead = "true")) {
+  if (book.isRead) {
     read.textContent = "✓";
   } else read.textContent = "✗";
   tableRow.appendChild(read);
 }
 
+function clearList() {
+  const header = document.getElementById("book-list").firstElementChild;
+  while (header.nextSibling) {
+    document.getElementById("book-list").removeChild(header.nextSibling);
+  }
+}
+
 function display() {
+  clearList();
   for (element of library) {
     createRow(element);
   }
 }
 
 display();
+
+const btnAddBook = document.querySelector("#add-book");
+const newTitle = document.querySelector("#title");
+const newAuthor = document.querySelector("#author");
+const newPages = document.querySelector("#pages");
+const newIsRead = document.querySelector("#isRead");
+
+function clearForm() {
+  newTitle.value = "";
+  newAuthor.value = "";
+  newPages.value = "";
+  newIsRead.checked = false;
+}
+
+btnAddBook.addEventListener("click", (event) => {
+  event.preventDefault();
+  addBook(
+    new Book(newTitle.value, newAuthor.value, newPages.value, newIsRead.value)
+  );
+  display();
+  clearForm();
+});
