@@ -35,7 +35,7 @@ function createRow(book) {
   tableRow.appendChild(read);
   const buttons = document.createElement("td");
   const index = library.indexOf(book);
-  buttons.innerHTML = `<button data-index="${index}" class="toggleRead">Read</button><button data-index="${index}" class="remove">Remove</button>`;
+  buttons.innerHTML = `<button class="toggleRead">Read</button><button class="remove">Remove</button>`;
   tableRow.appendChild(buttons);
 }
 
