@@ -12,29 +12,9 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author} is ${this.pages} pages long and ${read}.`;
 };
 
-//example book
-// const infiniteJest = new Book(
-//   "Infinite Jest",
-//   "David Foster Wallace",
-//   1000,
-//   true
-// );
-
-// const grandeSertao = new Book(
-//   "Grande Sertão Veredas",
-//   "Guimarães Rosa",
-//   720,
-//   false
-// );
-
 function addBook(book) {
   library.push(book);
 }
-
-//example test
-// addBook(infiniteJest);
-// addBook(grandeSertao);
-
 function createRow(book) {
   const table = document.getElementById("book-list");
   const tableRow = document.createElement("tr");
@@ -53,6 +33,10 @@ function createRow(book) {
     read.textContent = "✓";
   } else read.textContent = "✗";
   tableRow.appendChild(read);
+  const buttons = document.createElement("td");
+  const index = library.indexOf(book);
+  buttons.innerHTML = `<button data-index="${index}" class="toggleRead">Read</button><button data-index="${index}" class="remove">Remove</button>`;
+  tableRow.appendChild(buttons);
 }
 
 function clearList() {
@@ -67,6 +51,22 @@ function display() {
   for (element of library) {
     createRow(element);
   }
+
+  const btnRemove = document.querySelectorAll(".remove");
+
+  btnRemove.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      removeBook(index);
+    });
+  });
+
+  const btnRead = document.querySelectorAll(".toggleRead");
+
+  btnRead.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      toggleRead(index);
+    });
+  });
 }
 
 display();
@@ -86,8 +86,26 @@ btnAddBook.addEventListener("click", (event) => {
   const newAuthor = document.querySelector("#author");
   const newPages = document.querySelector("#pages");
   const newIsRead = document.querySelector("#isRead").checked;
+  const newBook = new Book(
+    newTitle.value,
+    newAuthor.value,
+    newPages.value,
+    newIsRead
+  );
 
-  addBook(new Book(newTitle.value, newAuthor.value, newPages.value, newIsRead));
+  addBook(newBook);
   display();
   clearForm();
 });
+
+function removeBook(index) {
+  library.splice(index, 1);
+  display();
+}
+
+function toggleRead(index) {
+  if (library[index].isRead) {
+    library[index].isRead = false;
+  } else library[index].isRead = true;
+  display();
+}
